@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <springProfile name="ping">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>logs/%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>365</maxHistory>
+                <maxFileSize>300MB</maxFileSize>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework" level="warn" additivity="false">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </logger>
+
+        <root level="warn">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="pong">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>logs/%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>365</maxHistory>
+                <maxFileSize>300MB</maxFileSize>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework" level="warn" additivity="false">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </logger>
+
+        <root level="warn">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
+
+</configuration>

@@ -1,0 +1,11 @@
+server:
+  port: 8000
+app:
+  key: "cose444"
+  remote: "http://127.0.0.1:8001/"
+  source:
+    position: "sender_ping"
+    alias: "ping"
+  target:
+    position: "receiver_pong"
+    alias: "pong"

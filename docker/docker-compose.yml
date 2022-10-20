@@ -1,0 +1,45 @@
+version: '3.0'
+
+services:
+  ping:
+    build:
+      args:
+        - ARG_PORT=${PING_PORT}
+        - ARG_REMOTE=http://pong:${PONG_PORT}/
+        - ARG_PROFILE=ping
+      context: .
+      dockerfile: Dockerfile
+    container_name: ping
+    environment:
+      - PING_PORT=${PING_PORT}
+    image: ping:v1
+    networks:
+      - pingpongnet
+    platform: linux/x86_64
+    ports:
+      - ${PING_PORT}:${PING_PORT}
+    restart: always
+
+  pong:
+    build:
+      args:
+        - ARG_PORT=${PONG_PORT}
+        - ARG_REMOTE=http://ping:${PING_PORT}/
+        - ARG_PROFILE=pong
+      context: .
+      dockerfile: Dockerfile
+    container_name: pong
+    environment:
+      - PING_PORT=${PING_PORT}
+    image: pong:v1
+    networks:
+      - pingpongnet
+    platform: linux/x86_64
+    ports:
+      - ${PONG_PORT}:${PONG_PORT}
+    restart: always
+
+networks:
+  pingpongnet:
+    driver: bridge
+    name: pingpongnet
